@@ -248,7 +248,6 @@ int basecaller_main(int argc, char* argv[]) {
         fprintf(stderr, "[%s::%.3f*%.2f] %d Entries (%.1fM bytes) loaded\n", __func__,
                 realtime() - realtime0, cputime() / (realtime() - realtime0),
                 status.num_reads,status.num_bytes/(1000.0*1000.0));
-        double realtime_p = realtime();
         //process a databatch
         process_db(core, db);
 
@@ -323,9 +322,10 @@ int basecaller_main(int argc, char* argv[]) {
         
         free_core(core,opt);
 
-    if (opt.out != stdout) {
-        fclose(opt.out);
-    }
+        if (opt.out != stdout) {
+            fclose(opt.out);
+        }
 
     return 0;
+    }
 }
